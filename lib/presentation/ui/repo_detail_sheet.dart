@@ -9,7 +9,6 @@ class RepoDetailSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("sdfhshg ${repo.commits.length}");
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -20,14 +19,18 @@ class RepoDetailSheet extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: Text(repo.name,
-                      style: const TextStyle(
-                          fontSize: 17, fontWeight: FontWeight.w600)),
+                  child: Text(
+                    repo.name,
+                    style: const TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ),
                 IconButton(
                   icon: const Icon(Icons.close),
                   onPressed: () => Navigator.pop(context),
-                )
+                ),
               ],
             ),
             const SizedBox(height: 12),
@@ -36,17 +39,21 @@ class RepoDetailSheet extends StatelessWidget {
               decoration: BoxDecoration(
                 color: UI.cardColor,
                 borderRadius: UI.cardRadius,
+                image: const DecorationImage(
+                  image: AssetImage('assets/github.png'),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             const SizedBox(height: 16),
             Text('Description: ${repo.description}', style: UI.subtitle),
             const SizedBox(height: 16),
             ...repo.commits.map(
-                  (e) => Padding(
+              (e) => Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4),
                 child: Text(e.message, style: UI.subtitle),
               ),
-            )
+            ),
           ],
         ),
       ),

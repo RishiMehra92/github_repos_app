@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
 import 'domain/entities/repo.dart';
 import 'domain/entities/commit.dart';
 import 'presentation/ui/repo_list_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
+  debugPrint('ENV loaded: ${dotenv.env}');
+
   await Hive.initFlutter();
 
   Hive.registerAdapter(RepoAdapter());

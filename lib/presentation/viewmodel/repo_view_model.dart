@@ -15,13 +15,20 @@ class RepoViewModel extends ChangeNotifier {
     await _repo.syncRepos();
   }
 
-  Future<void> loadCommits(int index) async {
-    if (repos[index].commits.isNotEmpty) return;
+  Future<void> loadCommitsIfNeeded(int index) async {
+    if (index < 0 || index >= repos.length) return;
 
-    final commits =
-        await _repo.getCommits(repos[index].name);
+    final repo = repos[index];
 
-    repos[index] = repos[index].copyWith(commits: commits);
-    notifyListeners();
+    if (repo.commits.isNotEmpty) return;
+
+    try {
+      final commits = await _repo.getCommits(repo.name);
+
+      repos[index] = repo.copyWith(commits: commits);
+      notifyListeners();
+    } catch (e) {
+      debugPrint('Failed to load commits for ${repo.name}: $e');
+    }
   }
 }

@@ -13,8 +13,9 @@ class GithubRepositoryImpl implements GithubRepository {
     final cached = await local.getRepos();
     if (cached.isNotEmpty) return cached;
 
-    final remoteRepos =
-        (await remote.fetchRepos()).map((e) => e.toEntity()).toList();
+    final remoteRepos = (await remote.fetchRepos())
+        .map((e) => e.toEntity())
+        .toList();
 
     await local.saveRepos(remoteRepos);
     return remoteRepos;
@@ -28,8 +29,9 @@ class GithubRepositoryImpl implements GithubRepository {
 
   @override
   Future<void> syncRepos() async {
-    final remoteRepos =
-        (await remote.fetchRepos()).map((e) => e.toEntity()).toList();
+    final remoteRepos = (await remote.fetchRepos())
+        .map((e) => e.toEntity())
+        .toList();
     await local.saveRepos(remoteRepos);
   }
 }
