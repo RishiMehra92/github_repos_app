@@ -26,10 +26,11 @@ class _RepoListScreenState extends State<RepoListScreen> {
     return Scaffold(
       backgroundColor: UI.bgColor,
       appBar: AppBar(
-        title: const Text('GITHUB'),
+        title: const Text('GITHUB',style: TextStyle(color: Colors.black),),
         backgroundColor: UI.bgColor,
         surfaceTintColor: Colors.transparent,
         elevation: 0,
+        scrolledUnderElevation: 0,
       ),
       body: AnimatedBuilder(
         animation: vm,
